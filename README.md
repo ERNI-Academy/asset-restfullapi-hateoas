@@ -101,22 +101,22 @@ builder.Services.AddControllers().AddHateoas(assemblies);
 
 4. Implement the ILinkGenerator<> interface for all the Dtos that must implement the Links functionality in their responses. See the example attached:
 
-![Link generator request](./docs/images/LinkGenerator.png "Link generator sample").
+![Link generator request](./docs/images/LinkGenerator.PNG "Link generator sample").
 
 5. Implement the classes inheriting from QueryStringParameters needed for your endpoints and dtos logic. See the example attached:
 
-![Sample query parameters](./docs/images/SampleQueryParameters.png "Query parameters sample class").
+![Sample query parameters](./docs/images/SampleQueryParameters.PNG "Query parameters sample class").
 
 6. Your controllers endpoints need to receive the this QueryParameters class as they are going to be used automatically on the Formatters.
 
-![Controller sample](./docs/images/ControllerSample.png "Controller sample").
+![Controller sample](./docs/images/ControllerSample.PNG "Controller sample").
 
 7. Formatters will intercept and format the Responses automatically when a request is performed with the Header **Accept** - **application/json+hateoas** or **Accept** - **application/xml+hateoas**.
  
 Once your sample app is up and running, an Api is listening on the configured port.
 Then, a query can be perfomed. Let's see the following example:
 
-![Sample request](./docs/images/SampleRequest.png "Sample request").
+![Sample request](./docs/images/SampleRequest.PNG "Sample request").
 
 The Header **Accept** - **application/json+hateoas** could be also **Accept** - **application/xml+hateoas**.
 
@@ -124,11 +124,11 @@ Then responses would look like:
 
 * For Json
 
-![Json request](./docs/images/JsonResponse.png "Json request").
+![Json request](./docs/images/JsonResponse.PNG "Json request").
 
 * For Xml
 
-![Xml request](./docs/images/XmlResponse.png "Xml request").
+![Xml request](./docs/images/XmlResponse.PNG "Xml request").
 
 
 ## Contributing
