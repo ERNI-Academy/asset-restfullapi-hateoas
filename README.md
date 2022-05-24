@@ -14,7 +14,7 @@ This boilerplate is using the following technologies:
 
 ## Getting Started
 
-This boilerplate implements [Hateoas](https://docs.microsoft.com/es-es/azure/architecture/best-practices/api-design) and is based on a Class library created on .Net 6. 
+This boilerplate implements [Hateoas](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design#use-hateoas-to-enable-navigation-to-related-resources) and is based on a Class library created on .Net 6. 
 
 The application supports the **application/json+hateoas** and **application/xml+hateoas** Api requests headers. This results on getting the full links when performing an http request.
 
@@ -77,10 +77,34 @@ Installation instructions Erni Api Hateoas by running:
 
 ## How to use it
 
-Once the Sample app is up and running, an Api is listening on the configured port.
+1. Create your own API project.
+
+2. Add reference to ERNI.Api.Hateoas project.
+
+3. Call the AddHateoas extension method to register all the required services and formatters on your Program.cs.
+
+```
+builder.Services.AddControllers().AddHateoas(AppDomain.CurrentDomain.GetAssemblies());
+```
+
+4. Implement the ILinkGenerator<> interface for all the Dtos that must implement the Links functionality in their responses. See the example attached:
+
+![Link generator request](/docs/images/LinkGenerator.png "Link generator sample").
+
+5. Implement the classes inheriting from QueryStringParameters needed for your endpoints and dtos logic. See the example attached:
+
+![Sample query parameters](/docs/images/SampleQueryParameters.png "Query parameters sample class").
+
+6. Your controllers endpoints need to receive the this QueryParameters class as they are going to be used automatically on the Formatters.
+
+![Controller sample](/docs/images/ControllerSample.png "Controller sample").
+
+7. Formatters will intercept and format the Responses automatically when a request is performed with the Header **Accept** - **application/json+hateoas** or **Accept** - **application/xml+hateoas**.
+ 
+Once your sample app is up and running, an Api is listening on the configured port.
 Then, a query can be perfomed. Let's see the following example:
 
-![Sample request](/docs/SampleRequest.png "Sample request").
+![Sample request](/docs/images/SampleRequest.png "Sample request").
 
 The Header **Accept** - **application/json+hateoas** could be also **Accept** - **application/xml+hateoas**.
 
@@ -88,11 +112,12 @@ Then responses would look like:
 
 * For Json
 
-![Json request](/docs/JsonResponse.png "Json request").
+![Json request](/docs/images/JsonResponse.png "Json request").
 
 * For Xml
 
-![Xml request](/docs/XmlResponse.png "Xml request").
+![Xml request](/docs/images/XmlResponse.png "Xml request").
+
 
 ## Contributing
 
