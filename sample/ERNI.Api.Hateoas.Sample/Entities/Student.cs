@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ERNI.Api.Hateoas.Sample
+namespace ERNI.Api.Hateoas.Sample.Entities
 {
     public class Student : BaseClass
     {

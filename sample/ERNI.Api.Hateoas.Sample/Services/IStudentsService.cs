@@ -1,7 +1,6 @@
-﻿using HateoasApi.Domain;
-using HateoasApi.Domain.Dto;
-using HateoasApi.Domain.QueryParameters;
-using HateoasApi.Services.Helpers;
+﻿using ERNI.Api.Hateoas.Dto;
+using ERNI.Api.Hateoas.Sample.Dto;
+using ERNI.Api.Hateoas.Sample.QueryParameters;
 
 namespace ERNI.Api.Hateoas.Sample.Services
 {
