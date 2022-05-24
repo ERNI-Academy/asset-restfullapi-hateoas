@@ -23,7 +23,11 @@ namespace ERNI.Api.Hateoas.Extension
                 return new UrlHelper(actionContext);
             });
 
-            builder.AddMvcOptions(o => o.OutputFormatters.Add(new JsonHateoasFormatter()));
+            builder.AddMvcOptions(o =>
+            {
+                o.OutputFormatters.Add(new JsonHateoasFormatter());
+                o.OutputFormatters.Add(new XmlHateoasFormatter());
+            });
             return builder;
         }
 
@@ -35,13 +39,13 @@ namespace ERNI.Api.Hateoas.Extension
 
         private static void RegisterLinkGeneratorAssemblies(this IServiceCollection serviceCollection, params Assembly[] assemblies)
         {
-            var assembly = assemblies!= null ? assemblies : new[] { Assembly.GetExecutingAssembly() };
-            var linkGenerators = assembly.SelectMany(i=> i.GetTypes().Where(x => !x.IsInterface &&
+            var assembly = assemblies != null ? assemblies : new[] { Assembly.GetExecutingAssembly() };
+            var linkGenerators = assembly.SelectMany(i => i.GetTypes().Where(x => !x.IsInterface &&
                 x.GetInterface(typeof(ILinkGenerator<>).Name) != null));
 
             foreach (var linkGenerator in linkGenerators)
             {
-                var interfaceLinkGenerator = linkGenerator.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(i=> i.Name != nameof(ILinkGenerator));
+                var interfaceLinkGenerator = linkGenerator.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(i => i.Name != nameof(ILinkGenerator));
                 serviceCollection.AddScoped(interfaceLinkGenerator, linkGenerator);
             }
         }

@@ -1,22 +1,21 @@
 ﻿using AutoMapper;
+using ERNI.Api.Hateoas.Dto;
+using ERNI.Api.Hateoas.Sample.Dto;
+using ERNI.Api.Hateoas.Sample.Entities;
+using ERNI.Api.Hateoas.Sample.QueryParameters;
 using ERNI.Api.Hateoas.Services;
-using HateoasApi.Domain;
-using HateoasApi.Domain.Dto;
-using HateoasApi.Domain.Entities;
-using HateoasApi.Domain.QueryParameters;
-using HateoasApi.Services.Helpers;
 
 namespace ERNI.Api.Hateoas.Sample.Services
 {
     public class StudentsService : IStudentsService
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        //private UnitOfWork unitOfWork = new UnitOfWork();
         private ISortHelper<Student> _sortHelper;
         private IMapper _mapper;
 
         public StudentsService(ISortHelper<Student> sortHelper, IMapper mapper)
         {
-            unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            //unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             _sortHelper = sortHelper;
             _mapper = mapper;
         }

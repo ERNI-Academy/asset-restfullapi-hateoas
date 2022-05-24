@@ -5,17 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System.Reflection;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace ERNI.Api.Hateoas.Formatter
 {
-    public class JsonHateoasFormatter : OutputFormatter
+    public class XmlHateoasFormatter : OutputFormatter
     {
-        public JsonHateoasFormatter()
+        public XmlHateoasFormatter()
         {
-            SupportedMediaTypes.Add("application/json+hateoas");
+            SupportedMediaTypes.Add("application/xml+hateoas");
         }
 
         public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
@@ -27,17 +27,13 @@ namespace ERNI.Api.Hateoas.Formatter
             var urlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext);
             var response = context.HttpContext.Response;
 
-            var serializerSettings = new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                NullValueHandling = NullValueHandling.Ignore
-            };
-
             if (context.Object is SerializableError error)
             {
-                var errorOutput = JsonConvert.SerializeObject(error, serializerSettings);
-                response.ContentType = "application/json";
-                return response.WriteAsync(errorOutput);
+                var streamError = new MemoryStream();
+                var errorSerializer = new XmlSerializer(typeof(SerializableError));
+                errorSerializer.Serialize(streamError, error);
+                response.ContentType = "application/xml";
+                return response.WriteAsync(Encoding.Default.GetString(streamError.ToArray()));
             }
 
             var currentResponseType = context.ObjectType.GenericTypeArguments.FirstOrDefault() != null ?
@@ -81,8 +77,12 @@ namespace ERNI.Api.Hateoas.Formatter
                 resultResponse = shapedData;
             }
 
-            var output = JsonConvert.SerializeObject(resultResponse, serializerSettings);
-            response.ContentType = "application/json+hateoas";
+            var stream = new MemoryStream();
+            var serializer = new XmlSerializer(resultResponse.GetType());
+            serializer.Serialize(stream, resultResponse);
+
+            var output = Encoding.Default.GetString(stream.ToArray());
+            response.ContentType = "application/xml+hateoas";
             return response.WriteAsync(output);
         }
 

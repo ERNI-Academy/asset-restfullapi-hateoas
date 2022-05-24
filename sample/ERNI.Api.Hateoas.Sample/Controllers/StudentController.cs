@@ -1,3 +1,6 @@
+using ERNI.Api.Hateoas.Sample.Dto;
+using ERNI.Api.Hateoas.Sample.QueryParameters;
+using ERNI.Api.Hateoas.Sample.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -5,12 +8,12 @@ namespace ERNI.Api.Hateoas.Sample.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StudentsController : ControllerBase
+    public class StudentController : ControllerBase
     {
-        private readonly ILogger<StudentsController> _logger;
+        private readonly ILogger<StudentController> _logger;
         private IStudentsService _studentsService;
 
-        public StudentController(ILogger<StudentsController> logger,
+        public StudentController(ILogger<StudentController> logger,
             IStudentsService studentsService)
         {
             _logger = logger;
@@ -37,13 +40,10 @@ namespace ERNI.Api.Hateoas.Sample.Controllers
             return Ok(result);
         }
 
-
         [HttpGet("{id}", Name = "GetStudentById")]
-        //[ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public IActionResult GetStudentById(Guid id, [FromQuery] StudentParameters studentParameters) => Ok(_studentsService.GetStudentById(id));
 
         [HttpPost(Name = "CreateStudent")]
-        //[ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public IActionResult CreateStudent(StudentToCreateUpdateDto studentToCreateDto)
         {
             var student = _studentsService.CreateStudent(studentToCreateDto);
@@ -51,7 +51,6 @@ namespace ERNI.Api.Hateoas.Sample.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteStudent")]
-        //[ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public IActionResult DeleteStudent(Guid id)
         {
             _studentsService.DeleteStudent(id);
@@ -59,7 +58,6 @@ namespace ERNI.Api.Hateoas.Sample.Controllers
         }
 
         [HttpPut("{id}", Name = "UpdateStudent")]
-        //[ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public IActionResult UpdateStudent(Guid id, [FromBody] StudentToCreateUpdateDto studentToUpdate, [FromQuery] StudentParameters studentParameters)
         {
             _studentsService.UpdateStudent(id, studentToUpdate);
