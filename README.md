@@ -78,9 +78,21 @@ Installation instructions Erni Api Hateoas by running:
 ## How to use it
 
 Once the Sample app is up and running, an Api is listening on the configured port.
-Then, some queries can be perfomed. Let's see the following example:
+Then, a query can be perfomed. Let's see the following example:
 
 ![Sample request](/docs/SampleRequest.png "Sample request").
+
+The Header **Accept** - **application/json+hateoas** could be also **Accept** - **application/xml+hateoas**.
+
+Then responses would look like:
+
+* For Json
+
+![Json request](/docs/JsonResponse.png "Json request").
+
+* For Xml
+
+![Xml request](/docs/XmlResponse.png "Xml request").
 
 ## Contributing
 
