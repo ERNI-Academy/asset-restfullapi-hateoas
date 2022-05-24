@@ -56,13 +56,13 @@ Installation instructions Erni Api Hateoas by running:
 . \
 ├── **Erni.Mobile.Hateoas** \
  &nbsp;&emsp;├── 📁 Dto: Contains all data transfer objects \
- &nbsp;&emsp;│&emsp;&emsp;└── 📄 Link.cs: Base class for Links generations. \ 
- &nbsp;&emsp;│&emsp;&emsp;└── 📄 LinkCollectionWrapper.cs: Wrapper class for Links. \ 
- &nbsp;&emsp;│&emsp;&emsp;└── 📄 LinkResourceBase.cs: Base class for LinkCollectionWrapper. \ 
+ &nbsp;&emsp;│&emsp;&emsp;└── 📄 Link.cs: Base class for Links generations. \
+ &nbsp;&emsp;│&emsp;&emsp;└── 📄 LinkCollectionWrapper.cs: Wrapper class for Links. \
+ &nbsp;&emsp;│&emsp;&emsp;└── 📄 LinkResourceBase.cs: Base class for LinkCollectionWrapper. \
  &nbsp;&emsp;│&emsp;&emsp;└── 📄 PagedList.cs: Base class to implement the paged list functionality. \
- &nbsp;&emsp;│&emsp;&emsp;└── 📄 PaginationFilter.cs: Class for filtering results. \  
- &nbsp;&emsp;│&emsp;&emsp;└── 📄 QueryStringParameters.cs: Class for query string parameters. \  
- &nbsp;&emsp;│&emsp;&emsp;└── 📄 ResponseDto.cs: Dynamic class to generate the Api responses. \  
+ &nbsp;&emsp;│&emsp;&emsp;└── 📄 PaginationFilter.cs: Class for filtering results. \
+ &nbsp;&emsp;│&emsp;&emsp;└── 📄 QueryStringParameters.cs: Class for query string parameters. \
+ &nbsp;&emsp;│&emsp;&emsp;└── 📄 ResponseDto.cs: Dynamic class to generate the Api responses. \
  &nbsp;&emsp;├── 📂 Extensions: Contains all custom extension \
  &nbsp;&emsp;│&emsp;&emsp;└── 📄 ServicesExtension.cs: Class that manages dependency injection. \
  &nbsp;&emsp;├── 📂 Formatter: Contains all custom formatters \
@@ -73,7 +73,7 @@ Installation instructions Erni Api Hateoas by running:
  &nbsp;&emsp;│&emsp;&emsp;└── 📄 IDataShaper.cs: Interface for DataShaper class. \
  &nbsp;&emsp;│&emsp;&emsp;└── 📄 ILinkGenerator.cs: Interface to be implemented for the Links generators. \
  &nbsp;&emsp;│&emsp;&emsp;└── 📄 ISortHelper.cs: Interface for SortHelper. \
- &nbsp;&emsp;│&emsp;&emsp;└── 📄 SortHelper.cs: Sorts the data to fullfill the query filters. \
+ &nbsp;&emsp;│&emsp;&emsp;└── 📄 SortHelper.cs: Sorts the data to fullfill the query filters.
 
 ## How to use it
 
@@ -83,28 +83,40 @@ Installation instructions Erni Api Hateoas by running:
 
 3. Call the AddHateoas extension method to register all the required services and formatters on your Program.cs.
 
+This will get all required files from your project
+
+```csharp
+builder.Services.AddControllers().AddHateoas();
 ```
-builder.Services.AddControllers().AddHateoas(AppDomain.CurrentDomain.GetAssemblies());
+In case you have a multiprojects solution and you have the required files out of the main project then:
+```csharp
+var assemblies = new[]
+{
+   Assembley1, 
+   Assembley2
+   ...
+};
+builder.Services.AddControllers().AddHateoas(assemblies);
 ```
 
 4. Implement the ILinkGenerator<> interface for all the Dtos that must implement the Links functionality in their responses. See the example attached:
 
-![Link generator request](/docs/images/LinkGenerator.png "Link generator sample").
+![Link generator request](./docs/images/LinkGenerator.png "Link generator sample").
 
 5. Implement the classes inheriting from QueryStringParameters needed for your endpoints and dtos logic. See the example attached:
 
-![Sample query parameters](/docs/images/SampleQueryParameters.png "Query parameters sample class").
+![Sample query parameters](./docs/images/SampleQueryParameters.png "Query parameters sample class").
 
 6. Your controllers endpoints need to receive the this QueryParameters class as they are going to be used automatically on the Formatters.
 
-![Controller sample](/docs/images/ControllerSample.png "Controller sample").
+![Controller sample](./docs/images/ControllerSample.png "Controller sample").
 
 7. Formatters will intercept and format the Responses automatically when a request is performed with the Header **Accept** - **application/json+hateoas** or **Accept** - **application/xml+hateoas**.
  
 Once your sample app is up and running, an Api is listening on the configured port.
 Then, a query can be perfomed. Let's see the following example:
 
-![Sample request](/docs/images/SampleRequest.png "Sample request").
+![Sample request](./docs/images/SampleRequest.png "Sample request").
 
 The Header **Accept** - **application/json+hateoas** could be also **Accept** - **application/xml+hateoas**.
 
@@ -112,11 +124,11 @@ Then responses would look like:
 
 * For Json
 
-![Json request](/docs/images/JsonResponse.png "Json request").
+![Json request](./docs/images/JsonResponse.png "Json request").
 
 * For Xml
 
-![Xml request](/docs/images/XmlResponse.png "Xml request").
+![Xml request](./docs/images/XmlResponse.png "Xml request").
 
 
 ## Contributing
