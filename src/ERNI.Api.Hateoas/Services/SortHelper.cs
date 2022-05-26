@@ -2,9 +2,9 @@
 using System.Text;
 using System.Linq.Dynamic.Core;
 
-namespace ERNI.Api.Hateoas.Services
-{
-    public class SortHelper<T> : ISortHelper<T>
+namespace ERNI.Api.Hateoas.Services;
+
+public class SortHelper<T> : ISortHelper<T>
 	{
 		public IQueryable<T> ApplySort(IQueryable<T> entities, string orderByQueryString)
 		{
@@ -41,4 +41,3 @@ namespace ERNI.Api.Hateoas.Services
 			return entities.OrderBy(orderQuery);
 		}
 	}
-}

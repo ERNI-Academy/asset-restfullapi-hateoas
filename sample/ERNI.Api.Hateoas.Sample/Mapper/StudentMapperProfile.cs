@@ -2,9 +2,9 @@
 using ERNI.Api.Hateoas.Sample.Dto;
 using ERNI.Api.Hateoas.Sample.Entities;
 
-namespace ERNI.Api.Hateoas.Sample.Mapper
-{
-    public class StudentMapperProfile : Profile
+namespace ERNI.Api.Hateoas.Sample.Mapper;
+
+public class StudentMapperProfile : Profile
 	{
 		public StudentMapperProfile()
 		{
@@ -12,4 +12,3 @@ namespace ERNI.Api.Hateoas.Sample.Mapper
 			CreateMap<Student, StudentToCreateUpdateDto>().ReverseMap();
 		}
 	}
-}
