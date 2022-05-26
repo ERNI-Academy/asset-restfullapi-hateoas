@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ERNI.Api.Hateoas.Sample.Entities
+namespace ERNI.Api.Hateoas.Sample.Entities;
+
+public class BaseClass
 {
-    public class BaseClass
-    {
-        [Key]
-        public Guid Id { get; set; }
-    }
+    [Key]
+    public Guid Id { get; set; }
 }

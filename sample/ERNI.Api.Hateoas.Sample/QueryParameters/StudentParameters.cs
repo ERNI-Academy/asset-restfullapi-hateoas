@@ -1,8 +1,8 @@
 ﻿using ERNI.Api.Hateoas.Dto;
 
-namespace ERNI.Api.Hateoas.Sample.QueryParameters
-{
-    public class StudentParameters : QueryStringParameters
+namespace ERNI.Api.Hateoas.Sample.QueryParameters;
+
+public class StudentParameters : QueryStringParameters
 	{
 		public StudentParameters()
 		{
@@ -18,4 +18,3 @@ namespace ERNI.Api.Hateoas.Sample.QueryParameters
 
 		public string Address { get; set; } = string.Empty;
 	}
-}

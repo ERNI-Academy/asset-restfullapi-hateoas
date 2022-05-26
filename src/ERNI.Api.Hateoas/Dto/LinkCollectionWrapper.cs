@@ -1,17 +1,16 @@
-﻿namespace ERNI.Api.Hateoas.Dto
+﻿namespace ERNI.Api.Hateoas.Dto;
+
+public class LinkCollectionWrapper<T> : LinkResourceBase
 {
-    public class LinkCollectionWrapper<T> : LinkResourceBase
+    public List<T> Value { get; set; } = new List<T>();
+
+    public LinkCollectionWrapper()
     {
-        public List<T> Value { get; set; } = new List<T>();
 
-        public LinkCollectionWrapper()
-        {
+    }
 
-        }
-
-        public LinkCollectionWrapper(List<T> value)
-        {
-            Value = value;
-        }
+    public LinkCollectionWrapper(List<T> value)
+    {
+        Value = value;
     }
 }

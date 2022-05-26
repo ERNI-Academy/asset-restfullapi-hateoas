@@ -1,9 +1,8 @@
 ﻿using ERNI.Api.Hateoas.Dto;
 
-namespace ERNI.Api.Hateoas.Services
+namespace ERNI.Api.Hateoas.Services;
+
+public interface IDataShaper
 {
-    public interface IDataShaper
-    {
-        IEnumerable<ResponseDto> ShapeData(object entity, string fieldsString);
-    }
+    IEnumerable<ResponseDto> ShapeData(object entity, string fieldsString);
 }
