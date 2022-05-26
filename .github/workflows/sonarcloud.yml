@@ -1,0 +1,26 @@
+name: sonarcloud
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_call:
+    secrets:
+        SONAR_TOKEN:
+          required: true
+  workflow_dispatch: ~
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: sonarcloud
+        uses: ERNI-Academy/assets-github-actions-dotnet-sonarcloud@v1
+        with:
+            sonar_project_key: 'ERNI-Academy_asset-restfullapi-hateoas'
+            sonar_token: ${{ secrets.SONAR_TOKEN }}
+            github_token: ${{ secrets.GITHUB_TOKEN }}
