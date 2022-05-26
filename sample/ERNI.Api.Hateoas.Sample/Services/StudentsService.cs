@@ -10,8 +10,8 @@ namespace ERNI.Api.Hateoas.Sample.Services;
 public class StudentsService : IStudentsService
 {
     //private UnitOfWork unitOfWork = new UnitOfWork();
-    private ISortHelper<Student> _sortHelper;
-    private IMapper _mapper;
+    private readonly ISortHelper<Student> _sortHelper;
+    private readonly IMapper _mapper;
 
     public StudentsService(ISortHelper<Student> sortHelper, IMapper mapper)
     {

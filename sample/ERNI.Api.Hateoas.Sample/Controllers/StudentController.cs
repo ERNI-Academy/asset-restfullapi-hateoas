@@ -10,13 +10,10 @@ namespace ERNI.Api.Hateoas.Sample.Controllers;
 [Route("[controller]")]
 public class StudentController : ControllerBase
 {
-    private readonly ILogger<StudentController> _logger;
-    private IStudentsService _studentsService;
+    private readonly IStudentsService _studentsService;
 
-    public StudentController(ILogger<StudentController> logger,
-        IStudentsService studentsService)
+    public StudentController(IStudentsService studentsService)
     {
-        _logger = logger;
         _studentsService = studentsService;
     }
 
