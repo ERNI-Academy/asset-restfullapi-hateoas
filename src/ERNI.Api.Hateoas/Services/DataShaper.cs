@@ -14,9 +14,6 @@ public class DataShaper : IDataShaper
             return ShapeData(entity as IEnumerable<object>, fieldsString);
         }
 
-        var info = entity.GetType().GetTypeInfo();
-        var interfaces = entity.GetType().GetInterfaces();
-
         FillProperties(entity);
         var requiredProperties = GetRequiredProperties(fieldsString);
 
@@ -62,7 +59,7 @@ public class DataShaper : IDataShaper
         return requiredProperties;
     }
 
-    private IEnumerable<ResponseDto> FetchData(IEnumerable<object> entities, IEnumerable<PropertyInfo> requiredProperties)
+    private static IEnumerable<ResponseDto> FetchData(IEnumerable<object> entities, IEnumerable<PropertyInfo> requiredProperties)
     {
         var shapedData = new List<ResponseDto>();
 
@@ -75,7 +72,7 @@ public class DataShaper : IDataShaper
         return shapedData;
     }
 
-    private ResponseDto FetchDataForEntity(object entity, IEnumerable<PropertyInfo> requiredProperties)
+    private static ResponseDto FetchDataForEntity(object entity, IEnumerable<PropertyInfo> requiredProperties)
     {
         var shapedObject = new ResponseDto();
 

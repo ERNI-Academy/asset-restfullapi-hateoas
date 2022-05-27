@@ -40,12 +40,12 @@ public class GenericFormatter
         return properties;
     }
 
-    internal T GetService<T>(OutputFormatterWriteContext context)
+    internal static T GetService<T>(OutputFormatterWriteContext context)
     {
         return (T)context.HttpContext.RequestServices.GetService(typeof(T));
     }
 
-    internal T GetService<T>(OutputFormatterWriteContext context, Type typeOfService)
+    internal static T GetService<T>(OutputFormatterWriteContext context, Type typeOfService)
     {
         return (T)context.HttpContext.RequestServices.GetService(typeOfService);
     }
@@ -59,7 +59,7 @@ public class GenericFormatter
         urlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext);
     }
 
-    internal ILinkGenerator GetLinkGenerator(OutputFormatterWriteContext context)
+    internal static ILinkGenerator GetLinkGenerator(OutputFormatterWriteContext context)
     {
         var currentResponseType = context.ObjectType.GenericTypeArguments.FirstOrDefault() != null ?
              context.ObjectType.GenericTypeArguments.FirstOrDefault() :
