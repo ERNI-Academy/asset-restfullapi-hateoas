@@ -35,7 +35,7 @@ internal class StudentLinkGenerator : ILinkGenerator<StudentDto>
 
         if (item.GetType() == typeof(IEnumerable<StudentDto>))
         {
-            return GetLinks(item as IEnumerable<StudentDto>);
+            return GetLinks();
         }
 
         return null;
@@ -81,7 +81,7 @@ internal class StudentLinkGenerator : ILinkGenerator<StudentDto>
         return links;
     }
 
-    private IEnumerable<Link> GetLinks(IEnumerable<StudentDto> items)
+    private IEnumerable<Link> GetLinks()
     {
         return new List<Link>
         {
