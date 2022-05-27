@@ -59,7 +59,7 @@ public class GenericFormatter
         urlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext);
     }
 
-    internal ILinkGenerator GetLinkGenerator(OutputFormatterWriteContext context)
+    internal static ILinkGenerator GetLinkGenerator(OutputFormatterWriteContext context)
     {
         var currentResponseType = context.ObjectType.GenericTypeArguments.FirstOrDefault() != null ?
              context.ObjectType.GenericTypeArguments.FirstOrDefault() :

@@ -59,7 +59,7 @@ public class DataShaper : IDataShaper
         return requiredProperties;
     }
 
-    private IEnumerable<ResponseDto> FetchData(IEnumerable<object> entities, IEnumerable<PropertyInfo> requiredProperties)
+    private static IEnumerable<ResponseDto> FetchData(IEnumerable<object> entities, IEnumerable<PropertyInfo> requiredProperties)
     {
         var shapedData = new List<ResponseDto>();
 
