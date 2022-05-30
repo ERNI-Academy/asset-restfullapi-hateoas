@@ -27,7 +27,7 @@ public class XmlHateoasFormatter : OutputFormatter
         }
 
         var genericFormatter = new GenericFormatter(context);
-        var resultResponse = genericFormatter.GetResultResponse(context);
+        var resultResponse = genericFormatter.GetResultResponse();
 
         var stream = new MemoryStream();
         var serializer = new XmlSerializer(resultResponse.GetType());

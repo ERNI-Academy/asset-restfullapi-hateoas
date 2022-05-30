@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ERNI.Api.Hateoas.Test": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:54613;http://localhost:54614"
+    }
+  }
+}

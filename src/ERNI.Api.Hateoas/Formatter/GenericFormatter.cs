@@ -1,24 +1,19 @@
 ﻿using ERNI.Api.Hateoas.Dto;
 using ERNI.Api.Hateoas.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using System.Reflection;
 
 namespace ERNI.Api.Hateoas.Formatter;
 
 public class GenericFormatter
 {
-    internal IActionContextAccessor contextAccessor;
-    internal IUrlHelperFactory urlHelperFactory;
     internal IDataShaper dataShaper;
-    internal IActionDescriptorCollectionProvider actionDescriptorProvider;
-    internal IUrlHelper urlHelper;
+    internal OutputFormatterWriteContext context;
 
-    public GenericFormatter(OutputFormatterWriteContext context)
+    public GenericFormatter(OutputFormatterWriteContext outputFormatterWriteContext)
     {
-        InitializeServices(context);
+        context = outputFormatterWriteContext; 
+        dataShaper = GetService<IDataShaper>();
     }
 
     internal static IEnumerable<Type> GetLinkGenerators()
@@ -32,34 +27,25 @@ public class GenericFormatter
     internal string GetProperties()
     {
         var properties = string.Empty;
-        if (contextAccessor.ActionContext.HttpContext.Request.Query.ContainsKey("Fields"))
+        if (context.HttpContext.Request.Query.ContainsKey("Fields"))
         {
-            properties = contextAccessor.ActionContext.HttpContext.Request.Query["Fields"];
+            properties = context.HttpContext.Request.Query["Fields"];
         }
 
         return properties;
     }
 
-    internal T GetService<T>(OutputFormatterWriteContext context)
+    internal T GetService<T>()
     {
         return (T)context.HttpContext.RequestServices.GetService(typeof(T));
     }
 
-    internal T GetService<T>(OutputFormatterWriteContext context, Type typeOfService)
+    internal T GetService<T>(Type typeOfService)
     {
         return (T)context.HttpContext.RequestServices.GetService(typeOfService);
     }
 
-    internal void InitializeServices(OutputFormatterWriteContext context)
-    {
-        contextAccessor = GetService<IActionContextAccessor>(context);
-        urlHelperFactory = GetService<IUrlHelperFactory>(context);
-        dataShaper = GetService<IDataShaper>(context);
-        actionDescriptorProvider = GetService<IActionDescriptorCollectionProvider>(context);
-        urlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext);
-    }
-
-    internal ILinkGenerator GetLinkGenerator(OutputFormatterWriteContext context)
+    internal ILinkGenerator GetLinkGenerator()
     {
         var currentResponseType = context.ObjectType.GenericTypeArguments.FirstOrDefault() != null ?
              context.ObjectType.GenericTypeArguments.FirstOrDefault() :
@@ -69,17 +55,17 @@ public class GenericFormatter
         var linkGenerators = GetLinkGenerators();
         var resultClass = Type.GetType(linkGenerators.FirstOrDefault(i => i.GetInterfaces().Any(j => j.GenericTypeArguments.Any(t => t == currentResponseType))).GetTypeInfo().AssemblyQualifiedName);
         var interfacef = resultClass.GetInterface(typeof(ILinkGenerator<>).Name);
-        var linkGenerator = GetService<ILinkGenerator>(context, interfacef);
+        var linkGenerator = GetService<ILinkGenerator>(interfacef);
         return linkGenerator;
     }
 
-    internal object GetResultResponse(OutputFormatterWriteContext context)
+    internal object GetResultResponse()
     {
-        var linkGenerator = GetLinkGenerator(context);
+        var linkGenerator = GetLinkGenerator();
         string properties = GetProperties();
 
         var collection = context.Object as IEnumerable<object>;
-        object resultResponse = null;
+        object resultResponse;
         if (collection != null)
         {
             var shapedData = dataShaper.ShapeData(context.Object, properties).ToList();

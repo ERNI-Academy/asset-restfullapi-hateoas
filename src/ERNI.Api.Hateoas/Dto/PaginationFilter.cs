@@ -7,11 +7,11 @@ public class PaginationFilter
     public PaginationFilter()
     {
         PageNumber = 1;
-        PageSize = 10;
+        PageSize = 1;
     }
     public PaginationFilter(int pageNumber, int pageSize)
     {
         PageNumber = pageNumber < 1 ? 1 : pageNumber;
-        PageSize = pageSize > 10 ? 10 : pageSize;
+        PageSize = pageSize < 1 ? 1 : pageSize;
     }
 }

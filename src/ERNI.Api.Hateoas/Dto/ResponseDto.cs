@@ -66,37 +66,24 @@ public class ResponseDto : DynamicObject, IXmlSerializable, IDictionary<string, 
         }
     }
 
-    private void WriteXmlElement(string key, object value, XmlWriter writer)
-    {
-        writer.WriteStartElement(key);
-
-        if (value.GetType() == typeof(List<Link>))
-        {
-            foreach (var val in value as List<Link>)
-            {
-                writer.WriteStartElement(nameof(Link));
-                WriteXmlElement(nameof(val.Href), val.Href, writer);
-                WriteXmlElement(nameof(val.Method), val.Method, writer);
-                WriteXmlElement(nameof(val.Rel), val.Rel, writer);
-                writer.WriteEndElement();
-            }
-        }
-        else
-        {
-            writer.WriteString(value.ToString());
-        }
-
-        writer.WriteEndElement();
-    }
-
     public void Add(string key, object value)
     {
         expando.Add(key, value);
     }
 
+    public void Add(KeyValuePair<string, object> item)
+    {
+        expando.Add(item);
+    }
+
     public bool ContainsKey(string key)
     {
         return expando.ContainsKey(key);
+    }
+
+    public bool Contains(KeyValuePair<string, object> item)
+    {
+        return expando.Contains(item);
     }
 
     public ICollection<string> Keys
@@ -107,6 +94,11 @@ public class ResponseDto : DynamicObject, IXmlSerializable, IDictionary<string, 
     public bool Remove(string key)
     {
         return expando.Remove(key);
+    }
+
+    public bool Remove(KeyValuePair<string, object> item)
+    {
+        return expando.Remove(item);
     }
 
     public bool TryGetValue(string key, out object value)
@@ -131,19 +123,9 @@ public class ResponseDto : DynamicObject, IXmlSerializable, IDictionary<string, 
         }
     }
 
-    public void Add(KeyValuePair<string, object> item)
-    {
-        expando.Add(item);
-    }
-
     public void Clear()
     {
         expando.Clear();
-    }
-
-    public bool Contains(KeyValuePair<string, object> item)
-    {
-        return expando.Contains(item);
     }
 
     public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
@@ -161,14 +143,34 @@ public class ResponseDto : DynamicObject, IXmlSerializable, IDictionary<string, 
         get { return expando.IsReadOnly; }
     }
 
-    public bool Remove(KeyValuePair<string, object> item)
-    {
-        return expando.Remove(item);
-    }
-
     public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
     {
         return expando.GetEnumerator();
+    }
+
+    private void WriteXmlElement(string key, object value, XmlWriter writer)
+    {
+        writer.WriteStartElement(key);
+
+        if (value != null)
+        {
+            if (value.GetType() == typeof(List<Link>))
+            {
+                foreach (var val in value as List<Link>)
+                {
+                    writer.WriteStartElement(nameof(Link));
+                    WriteXmlElement(nameof(val.Href), val.Href, writer);
+                    WriteXmlElement(nameof(val.Method), val.Method, writer);
+                    WriteXmlElement(nameof(val.Rel), val.Rel, writer);
+                    writer.WriteEndElement();
+                }
+            }
+            else
+            {
+                writer.WriteString(value.ToString());
+            }
+        }
+        writer.WriteEndElement();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
