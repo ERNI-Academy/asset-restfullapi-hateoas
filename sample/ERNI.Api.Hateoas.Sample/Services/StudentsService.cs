@@ -65,7 +65,7 @@ public class StudentsService : IStudentsService
         //this.unitOfWork.Save();
     }
 
-    private IEnumerable<Student> GetRandomStudents()
+    private static IEnumerable<Student> GetRandomStudents()
     {
         return new List<Student>
         {
