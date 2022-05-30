@@ -32,7 +32,7 @@ public class JsonHateoasFormatter : OutputFormatter
         }
 
         var genericFormatter = new GenericFormatter(context);
-        var resultResponse = genericFormatter.GetResultResponse(context);
+        var resultResponse = genericFormatter.GetResultResponse();
 
         var output = JsonConvert.SerializeObject(resultResponse, serializerSettings);
         response.ContentType = "application/json+hateoas";
