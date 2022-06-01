@@ -5,7 +5,8 @@ ERNI Academy Hateoas Api boilerplate to start a Hateoas Api.
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-
+[![sonarcloud](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/sonarcloud.yml/badge.svg?branch=main)](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/sonarcloud.yml)
+[![pages-build-deployment](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/pages/pages-build-deployment)
 ## Built With
 
 This boilerplate is using the following technologies:
