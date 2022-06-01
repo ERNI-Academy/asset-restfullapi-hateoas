@@ -7,6 +7,13 @@ ERNI Academy Hateoas Api boilerplate to start a Hateoas Api.
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![sonarcloud](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/sonarcloud.yml/badge.svg?branch=main)](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/sonarcloud.yml)
 [![pages-build-deployment](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)](https://github.com/ERNI-Academy/asset-restfullapi-hateoas/actions/workflows/pages/pages-build-deployment)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ERNI-Academy_asset-restfullapi-hateoas&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ERNI-Academy_asset-restfullapi-hateoas)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=ERNI-Academy_asset-restfullapi-hateoas&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=ERNI-Academy_asset-restfullapi-hateoas)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ERNI-Academy_asset-restfullapi-hateoas&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ERNI-Academy_asset-restfullapi-hateoas)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ERNI-Academy_asset-restfullapi-hateoas&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ERNI-Academy_asset-restfullapi-hateoas)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=ERNI-Academy_asset-restfullapi-hateoas&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=ERNI-Academy_asset-restfullapi-hateoas)
+
 ## Built With
 
 This boilerplate is using the following technologies:
