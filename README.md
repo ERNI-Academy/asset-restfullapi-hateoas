@@ -1,4 +1,4 @@
-# About ERNI Api Hateoas
+# About ERNI Api Hypertext as the Engine of Application State (Hateoas)
 
 ERNI Academy Hateoas Api boilerplate to start a Hateoas Api.
 
@@ -20,12 +20,25 @@ This boilerplate is using the following technologies:
 
 - [Net 6.0](https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6)
 
-
 ## Getting Started
 
-This boilerplate implements [Hateoas](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design#use-hateoas-to-enable-navigation-to-related-resources) and is based on a Class library created on .Net 6. 
+When we implement REST APIs, there are 4 levels of maturity to go from API till Fully Restful API:
 
-The application supports the **application/json+hateoas** and **application/xml+hateoas** Api requests headers. This results on getting the full links when performing an http request.
+- **Level 0: The Swamp of POX**: API designed at this level are not at all Rest APIs and this is where SOAP based web services takes place. 
+
+- **Level 1: Resource Based Address/Uri**: In this Level, the Concept of Resource-based Address is introduced, which tells you there should be Individual URI for each Resource on the server. It's like reducing the burden from the single endpoint (LEVEL 0 end Point which handles all operations) into multiple Resource Based URIs like Divide and Conquer algorithm.
+
+- **Level 2: Utilize Potential of HTTP**: REST developed under this level leverages the full potential of HTTP as an application Layer Protocol. REST API developed at this LEVEL uses Standard HTTP methods/verbs and different HTTP status codes to do different operations on Resource URI. So, the Request Body will no longer carry Operation information at this level. Hence, this API is much more mature than the API developed at LEVEL 0 and LEVEL 1.
+
+- **Level 3> Use Hypermedia (OR HATEOAS)**: This level makes use of Hypermedia (also Called HATEOAS--Hypermedia as Engine of Application state in REST world), which drives the interaction for the API Client.
+
+Typically, when we perform a REST request, we only get the data and not any actions around it. This is where HATEOAS comes in to fill the gap. A HATEOAS request allows you to not only send the data but also specify the related actions. For example:
+
+![Json request](./docs/images/JsonResponse.PNG "Json request").
+
+As it can be appreciated, it contains the **Links** property which represents all the resources available.
+
+This boilerplate will help you to fullfill level 3 REST Api, so your API will be considered a RestFull API. 
 
 ## Prerequisites
 
